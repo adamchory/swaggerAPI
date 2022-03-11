@@ -1,0 +1,120 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "My Player Project CRUD",
+        "description": "My User Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Players",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/players": {
+            "get": {
+                "tags": ["Players"],
+                "summary": "Get all Players on the roster",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Player"
+                        }
+                    }
+                }
+            }
+        },
+        "/player": {
+            "post": {
+                "tags": ["Players"],
+                "description": "Create new player on the roster",
+                "parameters": [
+                    {
+                        "name": "player",
+                        "in": "body",
+                        "description": "Player that we want to add",
+                        "schema": {
+                            "$ref": "#/definitions/Player"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New player is added",
+                        "schema": {
+                            "$ref": "#/definitions/Player"
+                        }
+                    }
+                }
+            }
+        },
+        "/player/{number}": {
+            "delete": {
+                "tags": ["Players"],
+                "description": "delete a player from the roster",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "Number of the player we want to delete",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/Player"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Player has been deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Player"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "definitions": {
+        "Player": {
+            "required": ["number","name"],
+            "properties": {
+                "number": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+
+
+
+
